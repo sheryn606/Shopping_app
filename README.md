@@ -1,27 +1,33 @@
-# ShoppingApp
+# Shopping App (Angular)
+A kids clothing shopping application built to practice Angular fundamentals and frontend architecture.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+This project focuses on UI development and component-based design.
 
-## Development server
+This project was built as part of my learning journey while studying Angular and frontend development.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Features Implemented
+- Foundational app UI
+- About page content and UI
+- Products listing page UI
+- Product cards with details (image, name, price, age)
+- Basic routing between pages
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Work In Progress
+- Add to Cart functionality (UI present, logic pending)
+- Cart state management
+- Checkout flow
+- Backend / API integration
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Tech Stack
+- Angular
+- TypeScript
+- HTML & CSS
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
