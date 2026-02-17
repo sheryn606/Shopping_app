@@ -6,8 +6,8 @@ import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'shopping_app';
+  title: string = 'Cuddlecot';
 }

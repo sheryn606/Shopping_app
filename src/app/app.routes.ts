@@ -6,17 +6,18 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AboutComponent } from './components/about/about.component';
 
 export const routes: Routes = [
-    {path:'',redirectTo:'home',pathMatch:'full'},
-    {path:'home',component: HomeComponent
-    },
-    {path:'products',component: ProductsComponent
-    },
-    {path:'cart',component: CartComponent
-    },
-    {path:'checkout',component: CheckoutComponent
-    },
-    {path:'about',component: AboutComponent
-    },
-    {path:'**',redirectTo:'home'}
+
+  // Default Route
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  // Main Pages
+  { path: 'home', component: HomeComponent, title: 'Cuddlecot - Home' },
+  { path: 'products', component: ProductsComponent, title: 'Cuddlecot - Products' },
+  { path: 'cart', component: CartComponent, title: 'Cuddlecot - Cart' },
+  { path: 'checkout', component: CheckoutComponent, title: 'Cuddlecot - Checkout' },
+  { path: 'about', component: AboutComponent, title: 'Cuddlecot - About Us' },
+
+  // Wildcard Route (404 handling)
+  { path: '**', redirectTo: 'home' }
 
 ];

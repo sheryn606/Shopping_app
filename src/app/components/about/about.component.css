@@ -1,23 +1,34 @@
-.intro{
-    font-size: 20px;
-    font-family:'Times New Roman', serif;
-    color:rgb(0, 46, 0);
-    padding:5px;
-    margin-top: 10px;
+.about-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff8fb;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
-.collection{
-    font-size: 20px;
-    font-family:'Times New Roman', serif;
-    color:rgb(0, 46, 0);
-    padding:5px;
+
+.about-container h2 {
+    text-align: center;
+    font-size: 32px;
+    color: #7b2c63;
+    margin-bottom: 20px;
 }
-.about_cotton{
-    font-size: 20px;
-    font-family:'Times New Roman', serif;
-    color:rgb(0, 46, 0);
-    padding:5px;
+
+.about-section {
+    margin-bottom: 25px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
 }
-.collection ul{
-   margin-left: 10px;
-   list-style-type: circle;
+
+.about-section strong {
+    color: #a14f86;
+}
+
+.collection ul {
+    padding-left: 20px;
+}
+
+.collection li {
+    margin-bottom: 8px;
 }

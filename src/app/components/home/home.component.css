@@ -1,0 +1,48 @@
+.home-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.hero {
+  background: #ffd6e0;
+  padding: 60px 20px;
+  border-radius: 10px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff4d6d;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.hero button:hover {
+  background-color: #e63950;
+}
+
+.featured {
+  margin-top: 50px;
+}
+
+.category-card {
+  display: inline-block;
+  width: 250px;
+  padding: 20px;
+  margin: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

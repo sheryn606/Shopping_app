@@ -1,17 +1,24 @@
-<section class="body">
-<header class="header">
-  <h2 class="title">   Shopping App</h2>
-  <nav class="navbar">
-    <a routerLink="/home" routerLinkActive="active">Home </a>
-    <a routerLink="/products" routerLinkActive="active">Products </a>
-    <a routerLink="/cart" routerLinkActive="active">Cart </a>
-    <a routerLink="/checkout" routerLinkActive="active">Checkout </a>
-    <a routerLink="/about" routerLinkActive="active">About</a>
-  </nav>
-</header>
-</section>
+<section class="main-container">
 
-<section class="content">
-  <router-outlet></router-outlet>
+  <header class="header">
+    
+    <div class="logo-section">
+      <h1 class="title">🧸 Cuddlecot</h1>
+      <p class="tagline">Shop with Comfort</p>
+    </div>
+
+    <nav class="navbar">
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/cart" routerLinkActive="active">Cart 🛒</a>
+      <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
+      <a routerLink="/about" routerLinkActive="active">About</a>
+    </nav>
+
+  </header>
+
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>
 
 </section>

@@ -1,11 +1,21 @@
-<div class="products-container" >
+<div class="products-container">
+
     <div class="product-card" *ngFor="let product of productsData">
-        <p><img src="{{product.img}}" alt="image"></p>
-        <p><strong>Id: </strong>{{product.id}}</p>
-        <p><strong>Name: </strong>{{product.name}}</p>
-        <p><strong>Price: </strong>{{product.price}}</p>
-        <p><strong>Category: </strong>{{product.category}}</p>
-        <p><strong>Age: </strong>{{product.age}}</p>
-        <p><button>Add to Cart</button></p>
+
+        <!-- Product Image -->
+        <img [src]="product.img" alt="image">
+
+        <p><strong>Id:</strong> {{product.id}}</p>
+        <p><strong>Name:</strong> {{product.name}}</p>
+        <p><strong>Price:</strong> ₹{{product.price}}</p>
+        <p><strong>Category:</strong> {{product.category}}</p>
+        <p><strong>Age:</strong> {{product.age}}</p>
+
+        <!-- Add to Cart Button -->
+        <button (click)="addToCart(product)">
+            Add to Cart
+        </button>
+
     </div>
+
 </div>
