@@ -4,7 +4,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AboutComponent } from './components/about/about.component';
-import { LoginComponent } from './login/login.component';
+
 
 export const routes: Routes = [
 <<<<<<< HEAD
@@ -33,7 +33,6 @@ export const routes: Routes = [
     },
     {path:'about',component: AboutComponent
     },
-    {path:'login',component:LoginComponent},
     {path:'**',redirectTo:'home'}
     
 >>>>>>> 8921dd8ae12977e8b3bcd295cc47ca3b35ff7826
