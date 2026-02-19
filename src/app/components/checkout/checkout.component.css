@@ -9,13 +9,18 @@
 }
 
 .cart-item {
-  margin: 8px 0;
+  margin: 8px auto;
 }
-
+h2{
+  margin-left:20px;
+}
+h3{
+  margin-left:20px;
+}
 input {
   width: 90%;
   padding: 8px;
-  margin: 8px 0;
+  margin: 8px auto;
 }
 
 button {
@@ -29,4 +34,7 @@ button {
 
 button:hover {
   background-color: #e63950;
+}
+.checkitems{
+  margin-left:20px;
 }

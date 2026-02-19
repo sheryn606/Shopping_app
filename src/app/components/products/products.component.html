@@ -1,21 +1,46 @@
+<div class="filters">
+
+  <!-- Category Filter -->
+  <select [(ngModel)]="selectedCategory">
+    <option value="">All Categories</option>
+    <option value="Girls">Girls</option>
+    <option value="Boys">Boys</option>
+  </select>
+
+  <!-- Age Filter -->
+  <select [(ngModel)]="selectedAge">
+    <option [ngValue]="null">All Ages</option>
+    <option [ngValue]="2">2</option>
+    <option [ngValue]="3">3</option>
+    <option [ngValue]="4">4</option>
+    <option [ngValue]="5">5</option>
+    <option [ngValue]="6">6</option>
+    <option [ngValue]="7">7</option>
+  </select>
+
+  <!-- Price Filter -->
+  <input type="number" placeholder="Min Price" [(ngModel)]="minPrice">
+  <input type="number" placeholder="Max Price" [(ngModel)]="maxPrice">
+
+</div>
+
 <div class="products-container">
 
-    <div class="product-card" *ngFor="let product of productsData">
+  <div class="product-card" *ngFor="let product of filteredProducts">
 
-        <!-- Product Image -->
-        <img [src]="product.img" alt="image">
+    <img [src]="product.image" alt="image">
 
-        <p><strong>Id:</strong> {{product.id}}</p>
-        <p><strong>Name:</strong> {{product.name}}</p>
-        <p><strong>Price:</strong> ₹{{product.price}}</p>
-        <p><strong>Category:</strong> {{product.category}}</p>
-        <p><strong>Age:</strong> {{product.age}}</p>
+    <p><strong>Id:</strong> {{ product.id }}</p>
+    <p><strong>Name:</strong> {{ product.name }}</p>
+    <p><strong>Price:</strong> ₹{{ product.price }}</p>
+    <p><strong>Category:</strong> {{ product.category }}</p>
+    <p><strong>Age:</strong>{{product.age}}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
 
-        <!-- Add to Cart Button -->
-        <button (click)="addToCart(product)">
-            Add to Cart
-        </button>
+    <button class="addtocart" (click)="addToCart(product)" >
+      Add to Cart
+    </button>
 
-    </div>
+  </div>
 
 </div>

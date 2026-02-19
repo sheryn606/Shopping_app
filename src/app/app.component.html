@@ -1,24 +1,23 @@
-<<<<<<< HEAD
-<section class="main-container">
+<header class="header">
 
-  <header class="header">
+  <div class="logo-section">
+    <h1 class="title">🧸 Cuddlecot</h1>
+    <p class="tagline">Shop with Comfort</p>
+  </div>
+
+  <!-- Navbar hidden ONLY on login -->
+  <nav class="navbar" *ngIf="router.url !== '/login'">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/products" routerLinkActive="active">Products</a>
+    <a routerLink="/cart" routerLinkActive="active">Cart</a>
+    <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
     
-    <div class="logo-section">
-      <h1 class="title">🧸 Cuddlecot</h1>
-      <p class="tagline">Shop with Comfort</p>
-    </div>
+    <button class="logout" routerLink="/login">Logout</button>
+  </nav>
 
-    <nav class="navbar">
-      <a routerLink="/home" routerLinkActive="active">Home</a>
-      <a routerLink="/products" routerLinkActive="active">Products</a>
-      <a routerLink="/cart" routerLinkActive="active">Cart 🛒</a>
-      <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
-      <a routerLink="/about" routerLinkActive="active">About</a>
-    </nav>
+</header>
 
-  </header>
-
-  <section class="content">
-    <router-outlet></router-outlet>
-  </section>
-
+<section>
+  <router-outlet></router-outlet>
+</section>

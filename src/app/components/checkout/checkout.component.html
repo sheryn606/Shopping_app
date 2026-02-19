@@ -1,24 +1,9 @@
-<div class="checkout-box">
+<h2>Checkout 🛒</h2>
 
-  <h2>Checkout 🛒</h2>
-
-  <!-- Cart Items -->
-  <div *ngFor="let item of cartItems" class="cart-item">
-    <p>
-      {{ item.name }} (x{{ item.quantity }}) 
-      - ₹{{ item.price * item.quantity }}
-    </p>
-  </div>
-
-  <!-- Total -->
-  <h3>Total: ₹{{ getTotal() }}</h3>
-
-  <!-- Simple Form -->
-  <div class="form-section">
-    <input type="text" placeholder="Full Name">
-    <input type="text" placeholder="Phone Number">
-  </div>
-
-  <button (click)="placeOrder()">Place Order</button>
-
+<div class="checkitems" *ngFor="let item of cartItems">
+  <p>
+    {{ item.name }} (x{{ item.quantity }}) - ₹{{ item.price * item.quantity }}
+  </p>
 </div>
+
+<h3>Total: ₹{{ getTotal() }}</h3>

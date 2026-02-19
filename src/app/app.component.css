@@ -4,7 +4,8 @@
     align-items: center;
     background: linear-gradient(135deg, #c38eb4, #9d6b9f);
     height: 100px;
-    padding: 0 40px;
+    padding: 40px;
+    margin-top: 10px;
 }
 
 .title {
@@ -12,6 +13,8 @@
     font-size: 48px;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
+    margin-top: 19px;
+    margin-bottom: 0px;
 }
 
 .navbar a {
@@ -24,5 +27,40 @@
 
 .navbar a:hover {
     color: #1f6669;
-    border-bottom: 2px solid #1f6669;
+   
+}
+.tagline{
+    font-size: 15px;
+    font-weight:1000;
+    color: #9f0a54;
+    margin-top: 0px;
+    margin-left: 85px;
+    
+  font-family: 'Playfair Display', serif;
+  
+
+}
+.logo-section{
+    gap: 0px;
+}
+.logout{
+    text-decoration: none;
+    color: #91002e;
+    font-size: 20px;
+    margin-left: 25px;
+    transition: all 0.3s ease;
+    background-color: #c38eb4;
+    border-radius: 10px;
+   
+}
+.logout:hover{
+    text-decoration: none;
+    color: #ffbdbd;
+    font-size: 20px;
+    margin-left: 25px;
+    transition: all 0.3s ease;
+outline:none;
+    background-color: #5d0223;
+    border-radius: 10px;
+    
 }
