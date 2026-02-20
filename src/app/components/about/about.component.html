@@ -1,36 +1,80 @@
-<div class="about-container">
+<div class="about-page">
 
-    <h2>💖 About Cuddlecot</h2>
+  <div class="about-header">
+    <h1>💖 About Cuddlecot</h1>
+    <p class="subtitle">Your trusted partner in kids' fashion</p>
+  </div>
 
-    <div class="about-section intro">
+  <div class="about-content">
+    
+    <mat-card class="about-intro">
+      <mat-card-content>
+        <h2>Our Story</h2>
         <p>
-            <strong>Cuddlecot</strong> is a cozy and modern online shopping platform designed to provide a smooth and delightful shopping experience.
-            Our goal is to bring comfort, quality, and affordability together in one place.
+          <strong>Cuddlecot</strong> is a modern e-commerce platform dedicated to providing the best quality,
+          comfortable, and stylish clothing for children. We believe every child deserves to look and feel amazing
+          while being comfortable in what they wear.
         </p>
-    </div>
-
-    <div class="about-section collection">
-        <p><strong>Our Collections Include:</strong></p>
-        <ul>
-            <li>👗 Trendy Fashion Wear</li>
-            <li>🧸 Soft Lifestyle Products</li>
-            <li>🛏️ Cozy Home Essentials</li>
-            <li>🎁 Cute Gift Items</li>
-        </ul>
-    </div>
-
-    <div class="about-section about_cotton">
         <p>
-            At Cuddlecot, we focus on high-quality materials, especially soft and breathable cotton fabrics.
-            We ensure every product is carefully selected to provide maximum comfort and durability.
+          Our mission is to bring comfort, quality, and affordability together in one place, making shopping
+          for kids' clothing a delightful experience for parents everywhere.
         </p>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="features-grid">
+      <mat-card class="feature-item" *ngFor="let feature of features">
+        <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.desc }}</p>
+      </mat-card>
     </div>
 
-    <div class="about-section">
+    <mat-card class="about-collections">
+      <mat-card-header>
+        <mat-card-title>Our Collections</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="collections-list">
+          <div class="collection-item">
+            <mat-icon>checkroom</mat-icon>
+            <span>Trendy Fashion Wear</span>
+          </div>
+          <div class="collection-item">
+            <mat-icon>toys</mat-icon>
+            <span>Soft Lifestyle Products</span>
+          </div>
+          <div class="collection-item">
+            <mat-icon>weekend</mat-icon>
+            <span>Cozy Home Essentials</span>
+          </div>
+          <div class="collection-item">
+            <mat-icon>card_giftcard</mat-icon>
+            <span>Cute Gift Items</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="about-tech">
+      <mat-card-content>
+        <h2>Technology Stack</h2>
         <p>
-            This application is built using Angular for frontend and connected to a database using DBMS concepts,
-            ensuring proper data storage, user management, and order tracking.
+          This application is built using modern web technologies including Angular for the frontend,
+          Node.js with Express for the backend API, and MySQL for reliable data storage. The system
+          ensures proper user management, product catalog, cart functionality, and secure order tracking.
         </p>
-    </div>
+        <div class="tech-badges">
+          <span class="badge">Angular 18</span>
+          <span class="badge">Angular Material</span>
+          <span class="badge">Node.js</span>
+          <span class="badge">Express</span>
+          <span class="badge">MySQL</span>
+          <span class="badge">TypeScript</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
 
 </div>

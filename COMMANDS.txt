@@ -1,0 +1,206 @@
+╔══════════════════════════════════════════════════════════════╗
+║        🧸 CUDDLECOT - COMPLETE COMMAND REFERENCE 🧸         ║
+╚══════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════
+1. BACKEND DEPENDENCIES INSTALLATION
+═══════════════════════════════════════════════════════════════
+
+cd /home/umeshwar/Downloads/Shopping_app/backend
+npm install express mysql2 cors
+
+
+═══════════════════════════════════════════════════════════════
+2. DATABASE SETUP IN MYSQL
+═══════════════════════════════════════════════════════════════
+
+METHOD 1 - From Terminal:
+---------------------------
+mysql -u root -p < /home/umeshwar/Downloads/Shopping_app/backend/database.sql
+
+Password: root@123
+
+
+METHOD 2 - From MySQL Workbench:
+----------------------------------
+1. Open MySQL Workbench
+2. Connect to localhost (root/root@123)
+3. File → Open SQL Script
+4. Select: /home/umeshwar/Downloads/Shopping_app/backend/database.sql
+5. Click Execute (⚡ Lightning icon)
+
+
+METHOD 3 - From MySQL Terminal:
+---------------------------------
+mysql -u root -p
+(Enter password: root@123)
+
+source /home/umeshwar/Downloads/Shopping_app/backend/database.sql
+
+
+═══════════════════════════════════════════════════════════════
+3. START BACKEND SERVER
+═══════════════════════════════════════════════════════════════
+
+Terminal 1:
+-----------
+cd /home/umeshwar/Downloads/Shopping_app/backend
+node server.js
+
+OR (with auto-reload):
+npm run dev
+
+Expected Output:
+✅ Connected to MySQL database: cuddlecot_db
+🚀 Server running on http://localhost:3000
+
+
+═══════════════════════════════════════════════════════════════
+4. START ANGULAR FRONTEND
+═══════════════════════════════════════════════════════════════
+
+Terminal 2:
+-----------
+cd /home/umeshwar/Downloads/Shopping_app
+ng serve
+
+OR (to open browser automatically):
+ng serve --open
+
+Expected Output:
+✔ Browser application bundle generation complete.
+✔ Development server is listening on http://localhost:4200/
+
+
+═══════════════════════════════════════════════════════════════
+5. FIRST TIME SETUP (ONE TIME ONLY)
+═══════════════════════════════════════════════════════════════
+
+Install Angular Material:
+--------------------------
+ng add @angular/material
+
+Choose:
+  ✓ Theme: Indigo/Pink (or any you prefer)
+  ✓ Typography: Yes
+  ✓ Animations: Yes
+
+
+═══════════════════════════════════════════════════════════════
+6. ACCESS THE APPLICATION
+═══════════════════════════════════════════════════════════════
+
+Open Browser:
+http://localhost:4200
+
+Test Login:
+Email: rahul@example.com
+Password: password123
+
+
+═══════════════════════════════════════════════════════════════
+7. VERIFY EVERYTHING IS WORKING
+═══════════════════════════════════════════════════════════════
+
+Check Backend API:
+curl http://localhost:3000/api/products
+
+Check Database:
+mysql -u root -p
+USE cuddlecot_db;
+SELECT COUNT(*) FROM products;  -- Should return 15
+SELECT COUNT(*) FROM users;     -- Should return 5
+
+
+═══════════════════════════════════════════════════════════════
+8. STOPPING THE SERVERS
+═══════════════════════════════════════════════════════════════
+
+In each terminal, press: Ctrl + C
+
+
+═══════════════════════════════════════════════════════════════
+9. RESTART PROCEDURE (AFTER SYSTEM REBOOT)
+═══════════════════════════════════════════════════════════════
+
+Terminal 1 - Backend:
+cd /home/umeshwar/Downloads/Shopping_app/backend
+npm start
+
+Terminal 2 - Frontend:
+cd /home/umeshwar/Downloads/Shopping_app
+ng serve
+
+
+═══════════════════════════════════════════════════════════════
+10. TROUBLESHOOTING COMMANDS
+═══════════════════════════════════════════════════════════════
+
+Kill Port 3000 (if backend won't start):
+sudo lsof -t -i:3000 | xargs kill -9
+
+Kill Port 4200 (if Angular won't start):
+sudo lsof -t -i:4200 | xargs kill -9
+
+Check MySQL Status:
+sudo systemctl status mysql
+
+Start MySQL:
+sudo systemctl start mysql
+
+Check Node Version:
+node --version  (should be v18+)
+
+Check Angular Version:
+ng version
+
+
+═══════════════════════════════════════════════════════════════
+SUMMARY - COPY THESE 4 COMMANDS FOR QUICK START:
+═══════════════════════════════════════════════════════════════
+
+# 1. Install backend dependencies (first time only)
+cd backend && npm install express mysql2 cors && cd ..
+
+# 2. Setup database (first time only)
+mysql -u root -p < backend/database.sql
+
+# 3. Start backend (Terminal 1)
+cd backend && npm start
+
+# 4. Start frontend (Terminal 2 - new terminal)
+ng serve
+
+
+═══════════════════════════════════════════════════════════════
+TEST USERS:
+═══════════════════════════════════════════════════════════════
+1. rahul@example.com   / password123
+2. priya@example.com   / password123
+3. amit@example.com    / password123
+4. sneha@example.com   / password123
+5. vikram@example.com  / password123
+
+
+═══════════════════════════════════════════════════════════════
+API ENDPOINTS (for testing with Postman/curl):
+═══════════════════════════════════════════════════════════════
+
+GET    http://localhost:3000/api/products
+GET    http://localhost:3000/api/products/1
+POST   http://localhost:3000/api/login
+GET    http://localhost:3000/api/cart/1
+POST   http://localhost:3000/api/cart
+PUT    http://localhost:3000/api/cart/1
+DELETE http://localhost:3000/api/cart/1
+POST   http://localhost:3000/api/orders
+GET    http://localhost:3000/api/orders/1
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                    🎉 YOU'RE ALL SET! 🎉                    ║
+║                                                              ║
+║  Backend:  http://localhost:3000                            ║
+║  Frontend: http://localhost:4200                            ║
+║  Login:    rahul@example.com / password123                  ║
+╚══════════════════════════════════════════════════════════════╝

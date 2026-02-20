@@ -1,0 +1,241 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    🧸 CUDDLECOT ARCHITECTURE 🧸                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          FRONTEND (Angular 18)                          │
+│                        http://localhost:4200                            │
+└─────────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   │ HTTP Requests
+                                   ▼
+         ┌────────────────────────────────────────────────┐
+         │         ANGULAR MATERIAL COMPONENTS            │
+         ├────────────────────────────────────────────────┤
+         │  • MatToolbar (Navbar)                         │
+         │  • MatCard (Product Cards)                     │
+         │  • MatTable (Cart Table)                       │
+         │  • MatFormField (Login Form)                   │
+         │  • MatButton (All Buttons)                     │
+         │  • MatIcon (Icons)                             │
+         │  • MatSpinner (Loading)                        │
+         │  • MatSnackBar (Notifications)                 │
+         │  • MatBadge (Cart Count)                       │
+         └────────────────────────────────────────────────┘
+                                   │
+         ┌────────────────────────────────────────────────┐
+         │            COMPONENTS LAYER                    │
+         ├────────────────────────────────────────────────┤
+         │  LoginComponent        → User Authentication   │
+         │  HomeComponent         → Landing Page          │
+         │  ProductsComponent     → Product Catalog       │
+         │  CartComponent         → Shopping Cart         │
+         │  CheckoutComponent     → Order Summary         │
+         │  AboutComponent        → Information           │
+         └────────────────────────────────────────────────┘
+                                   │
+         ┌────────────────────────────────────────────────┐
+         │             SERVICES LAYER                     │
+         ├────────────────────────────────────────────────┤
+         │  ApiService (HttpClient + RxJS)                │
+         │    • getProducts()                             │
+         │    • login()                                   │
+         │    • addToCart()                               │
+         │    • createOrder()                             │
+         │    • BehaviorSubject for cart state            │
+         └────────────────────────────────────────────────┘
+                                   │
+                                   │ HTTP GET/POST/PUT/DELETE
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       BACKEND API (Express.js)                          │
+│                        http://localhost:3000/api                        │
+└─────────────────────────────────────────────────────────────────────────┘
+                                   │
+         ┌────────────────────────────────────────────────┐
+         │              REST API ENDPOINTS                │
+         ├────────────────────────────────────────────────┤
+         │  GET    /api/products        → All Products    │
+         │  GET    /api/products/:id    → Single Product  │
+         │  POST   /api/login           → Authenticate    │
+         │  GET    /api/cart/:userId    → User Cart       │
+         │  POST   /api/cart            → Add to Cart     │
+         │  PUT    /api/cart/:id        → Update Qty      │
+         │  DELETE /api/cart/:id        → Remove Item     │
+         │  POST   /api/orders          → Place Order     │
+         │  GET    /api/orders/:userId  → Order History   │
+         └────────────────────────────────────────────────┘
+                                   │
+         ┌────────────────────────────────────────────────┐
+         │           MIDDLEWARE LAYER                     │
+         ├────────────────────────────────────────────────┤
+         │  • CORS (Cross-Origin Requests)                │
+         │  • express.json() (Body Parser)                │
+         │  • Error Handling                              │
+         └────────────────────────────────────────────────┘
+                                   │
+         ┌────────────────────────────────────────────────┐
+         │          DATABASE CONNECTION                   │
+         ├────────────────────────────────────────────────┤
+         │  db.js (MySQL2)                                │
+         │    • Host: localhost                           │
+         │    • User: root                                │
+         │    • Password: root@123                        │
+         │    • Database: cuddlecot_db                    │
+         └────────────────────────────────────────────────┘
+                                   │
+                                   │ SQL Queries
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         DATABASE (MySQL 8.0)                            │
+│                         Database: cuddlecot_db                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+         ┌────────────────────────────────────────────────┐
+         │              DATABASE SCHEMA                   │
+         ├────────────────────────────────────────────────┤
+         │                                                │
+         │  ┌─────────────┐       ┌──────────────┐       │
+         │  │   users     │       │  products    │       │
+         │  ├─────────────┤       ├──────────────┤       │
+         │  │ id (PK)     │       │ id (PK)      │       │
+         │  │ name        │       │ name         │       │
+         │  │ email       │       │ price        │       │
+         │  │ password    │       │ image        │       │
+         │  │ phone       │       │ category     │       │
+         │  │ address     │       │ description  │       │
+         │  └─────────────┘       │ age          │       │
+         │        │               │ stock        │       │
+         │        │               └──────────────┘       │
+         │        │                      │               │
+         │        │                      │               │
+         │  ┌─────▼──────┐       ┌──────▼───────┐       │
+         │  │   cart     │       │ order_items  │       │
+         │  ├────────────┤       ├──────────────┤       │
+         │  │ id (PK)    │       │ id (PK)      │       │
+         │  │ user_id(FK)│       │ order_id(FK) │       │
+         │  │ product_id │       │ product_id   │       │
+         │  │ quantity   │       │ quantity     │       │
+         │  └────────────┘       │ price        │       │
+         │                       └──────────────┘       │
+         │                              ▲               │
+         │        ┌─────────────────────┘               │
+         │        │                                     │
+         │  ┌─────┴──────┐                              │
+         │  │  orders    │                              │
+         │  ├────────────┤                              │
+         │  │ id (PK)    │                              │
+         │  │ user_id(FK)│                              │
+         │  │ total      │                              │
+         │  │ status     │                              │
+         │  │ order_date │                              │
+         │  └────────────┘                              │
+         │                                              │
+         └──────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+                            DATA FLOW DIAGRAM
+
+═══════════════════════════════════════════════════════════════════════════
+
+  USER ACTION                 COMPONENT              SERVICE              API
+     │                           │                      │                  │
+     │  Click Login              │                      │                  │
+     ├──────────────────────────>│                      │                  │
+     │                           │  login(email, pass)  │                  │
+     │                           ├─────────────────────>│                  │
+     │                           │                      │ POST /api/login  │
+     │                           │                      ├─────────────────>│
+     │                           │                      │                  │──┐
+     │                           │                      │                  │  │ Query DB
+     │                           │                      │                  │<─┘
+     │                           │                      │   { user: {...} }│
+     │                           │                      │<─────────────────┤
+     │                           │  Observable<User>    │                  │
+     │                           │<─────────────────────┤                  │
+     │  Redirect to /home        │                      │                  │
+     │<──────────────────────────┤                      │                  │
+     │                           │                      │                  │
+     │  Browse Products          │                      │                  │
+     ├──────────────────────────>│                      │                  │
+     │                           │  getProducts()       │                  │
+     │                           ├─────────────────────>│                  │
+     │                           │                      │ GET /api/products│
+     │                           │                      ├─────────────────>│
+     │                           │                      │                  │──┐
+     │                           │                      │                  │  │ SELECT *
+     │                           │                      │                  │<─┘
+     │                           │                      │   Product[]      │
+     │                           │                      │<─────────────────┤
+     │                           │  Observable<Product[]>│                 │
+     │                           │<─────────────────────┤                  │
+     │  Display Products         │                      │                  │
+     │<──────────────────────────┤                      │                  │
+     │                           │                      │                  │
+     │  Add to Cart              │                      │                  │
+     ├──────────────────────────>│                      │                  │
+     │                           │  addToCart(product)  │                  │
+     │                           ├─────────────────────>│                  │
+     │                           │                      │ POST /api/cart   │
+     │                           │                      ├─────────────────>│
+     │                           │                      │                  │──┐
+     │                           │                      │                  │  │ INSERT
+     │                           │                      │                  │<─┘
+     │                           │                      │   { success }    │
+     │                           │                      │<─────────────────┤
+     │                           │  loadCart()          │                  │
+     │                           │  cart$.next([...])   │                  │
+     │                           │<─────────────────────┤                  │
+     │  Show Snackbar            │                      │                  │
+     │  Update Badge             │                      │                  │
+     │<──────────────────────────┤                      │                  │
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+                         TECHNOLOGY STACK LAYERS
+
+═══════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  PRESENTATION LAYER                                                     │
+│  ├─ Angular Material (UI Components)                                   │
+│  ├─ Custom CSS (Purple Gradient Theme)                                 │
+│  └─ Responsive Grid Layout                                             │
+├─────────────────────────────────────────────────────────────────────────┤
+│  APPLICATION LAYER                                                      │
+│  ├─ Angular 18 (Framework)                                             │
+│  ├─ TypeScript 5.5 (Language)                                          │
+│  ├─ RxJS 7.8 (Reactive Programming)                                    │
+│  └─ Router (Navigation)                                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│  SERVICE LAYER                                                          │
+│  ├─ HttpClient (API Communication)                                     │
+│  ├─ BehaviorSubject (State Management)                                 │
+│  └─ Observables (Async Operations)                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│  API LAYER                                                              │
+│  ├─ Express.js 4.18 (Web Framework)                                    │
+│  ├─ Node.js (Runtime)                                                  │
+│  ├─ CORS (Security)                                                    │
+│  └─ Body Parser (Middleware)                                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│  DATA ACCESS LAYER                                                      │
+│  ├─ MySQL2 3.6 (Database Driver)                                       │
+│  ├─ Connection Pooling                                                 │
+│  └─ Prepared Statements                                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│  DATABASE LAYER                                                         │
+│  ├─ MySQL 8.0 (RDBMS)                                                  │
+│  ├─ Relational Schema                                                  │
+│  ├─ Foreign Keys                                                       │
+│  └─ Indexes                                                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════
+                            🎯 READY TO RUN! 🎯
+═══════════════════════════════════════════════════════════════════════════

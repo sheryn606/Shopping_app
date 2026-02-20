@@ -1,36 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ApiService } from '../../services/api.service';
 import { CartItem } from '../../models/cart.model';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [
+    CommonModule, 
+    RouterLink,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
+  ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
 
-  constructor(private api: ApiService) {}
+  cartItems: CartItem[] = [];
+  displayedColumns: string[] = ['image', 'name', 'price', 'quantity', 'subtotal', 'actions'];
 
-  get cartItems(): CartItem[] {
-    return this.api.getCart();
+  constructor(
+    private api: ApiService,
+    private snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit() {
+    this.api.cart$.subscribe(items => {
+      this.cartItems = items;
+    });
   }
 
   increaseQuantity(item: CartItem) {
-    item.quantity++;
+    const newQuantity = item.quantity + 1;
+    this.api.updateCartItemQuantity(item.id, newQuantity).subscribe({
+      next: () => {
+        this.snackBar.open('Quantity updated', 'Close', { duration: 1500 });
+      }
+    });
   }
 
   decreaseQuantity(item: CartItem) {
     if (item.quantity > 1) {
-      item.quantity--;
+      const newQuantity = item.quantity - 1;
+      this.api.updateCartItemQuantity(item.id, newQuantity).subscribe({
+        next: () => {
+          this.snackBar.open('Quantity updated', 'Close', { duration: 1500 });
+        }
+      });
     }
   }
 
   removeItem(item: CartItem) {
-    this.api.removeCartItem(item.id);
+    this.api.removeCartItem(item.id).subscribe({
+      next: () => {
+        this.snackBar.open('Item removed from cart', 'Close', { 
+          duration: 2000,
+          panelClass: ['success-snackbar']
+        });
+      }
+    });
   }
 
   getTotal(): number {

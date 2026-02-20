@@ -1,23 +1,54 @@
-<header class="header">
-
+<mat-toolbar class="navbar" *ngIf="router.url !== '/login'">
+  
   <div class="logo-section">
-    <h1 class="title">🧸 Cuddlecot</h1>
-    <p class="tagline">Shop with Comfort</p>
+    <mat-icon class="logo-icon">child_care</mat-icon>
+    <div class="brand">
+      <h1 class="brand-title">Cuddlecot</h1>
+      <p class="brand-tagline">Shop with Comfort</p>
+    </div>
   </div>
 
-  <!-- Navbar hidden ONLY on login -->
-  <nav class="navbar" *ngIf="router.url !== '/login'">
-    <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/products" routerLinkActive="active">Products</a>
-    <a routerLink="/cart" routerLinkActive="active">Cart</a>
-    <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
-    <a routerLink="/about" routerLinkActive="active">About</a>
-    
-    <button class="logout" routerLink="/login">Logout</button>
+  <span class="spacer"></span>
+
+  <nav class="nav-links">
+    <a mat-button routerLink="/home" routerLinkActive="active">
+      <mat-icon>home</mat-icon>
+      Home
+    </a>
+    <a mat-button routerLink="/products" routerLinkActive="active">
+      <mat-icon>shopping_bag</mat-icon>
+      Products
+    </a>
+    <a mat-button routerLink="/cart" routerLinkActive="active">
+      <mat-icon [matBadge]="cartItemCount" matBadgeColor="warn" [matBadgeHidden]="cartItemCount === 0">shopping_cart</mat-icon>
+      Cart
+    </a>
+    <a mat-button routerLink="/checkout" routerLinkActive="active">
+      <mat-icon>payment</mat-icon>
+      Checkout
+    </a>
+    <a mat-button routerLink="/about" routerLinkActive="active">
+      <mat-icon>info</mat-icon>
+      About
+    </a>
   </nav>
 
-</header>
+  <span class="spacer"></span>
 
-<section>
+  <div class="user-section">
+    <span class="user-name">👋 {{ userName }}</span>
+    <button mat-raised-button color="warn" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </div>
+
+</mat-toolbar>
+
+<main class="main-content">
   <router-outlet></router-outlet>
-</section>
+</main>
+
+<footer class="footer" *ngIf="router.url !== '/login'">
+  <p>&copy; 2026 Cuddlecot. All rights reserved. | Made with ❤️ for kids</p>
+</footer>

@@ -1,45 +1,93 @@
-<div class="filters">
+<div class="products-page">
+  
+  <!-- Filter Section -->
+  <mat-card class="filter-card">
+    <mat-card-header>
+      <mat-card-title>🔍 Filter Products</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="filters">
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="selectedCategory">
+            <mat-option value="">All Categories</mat-option>
+            <mat-option value="Girls">Girls</mat-option>
+            <mat-option value="Boys">Boys</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <!-- Category Filter -->
-  <select [(ngModel)]="selectedCategory">
-    <option value="">All Categories</option>
-    <option value="Girls">Girls</option>
-    <option value="Boys">Boys</option>
-  </select>
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <mat-select [(ngModel)]="selectedAge">
+            <mat-option [value]="null">All Ages</mat-option>
+            <mat-option [value]="2">2 Years</mat-option>
+            <mat-option [value]="3">3 Years</mat-option>
+            <mat-option [value]="4">4 Years</mat-option>
+            <mat-option [value]="5">5 Years</mat-option>
+            <mat-option [value]="6">6 Years</mat-option>
+            <mat-option [value]="7">7 Years</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <!-- Age Filter -->
-  <select [(ngModel)]="selectedAge">
-    <option [ngValue]="null">All Ages</option>
-    <option [ngValue]="2">2</option>
-    <option [ngValue]="3">3</option>
-    <option [ngValue]="4">4</option>
-    <option [ngValue]="5">5</option>
-    <option [ngValue]="6">6</option>
-    <option [ngValue]="7">7</option>
-  </select>
+        <mat-form-field appearance="outline">
+          <mat-label>Min Price</mat-label>
+          <input matInput type="number" placeholder="₹0" [(ngModel)]="minPrice">
+        </mat-form-field>
 
-  <!-- Price Filter -->
-  <input type="number" placeholder="Min Price" [(ngModel)]="minPrice">
-  <input type="number" placeholder="Max Price" [(ngModel)]="maxPrice">
+        <mat-form-field appearance="outline">
+          <mat-label>Max Price</mat-label>
+          <input matInput type="number" placeholder="₹5000" [(ngModel)]="maxPrice">
+        </mat-form-field>
 
-</div>
+        <button mat-raised-button color="warn" (click)="clearFilters()">
+          Clear Filters
+        </button>
 
-<div class="products-container">
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-  <div class="product-card" *ngFor="let product of filteredProducts">
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+    <p>Loading products...</p>
+  </div>
 
-    <img [src]="product.image" alt="image">
+  <!-- Products Grid -->
+  <div class="products-grid" *ngIf="!loading">
+    
+    <mat-card class="product-card" *ngFor="let product of filteredProducts">
+      <img mat-card-image [src]="product.image" [alt]="product.name">
+      
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>
+          <mat-chip-set>
+            <mat-chip class="category-chip">{{ product.category }}</mat-chip>
+            <mat-chip class="age-chip">Age {{ product.age }}</mat-chip>
+          </mat-chip-set>
+        </mat-card-subtitle>
+      </mat-card-header>
 
-    <p><strong>Id:</strong> {{ product.id }}</p>
-    <p><strong>Name:</strong> {{ product.name }}</p>
-    <p><strong>Price:</strong> ₹{{ product.price }}</p>
-    <p><strong>Category:</strong> {{ product.category }}</p>
-    <p><strong>Age:</strong>{{product.age}}</p>
-    <p><strong>Description:</strong> {{ product.description }}</p>
+      <mat-card-content>
+        <p class="description">{{ product.description }}</p>
+        <p class="price">₹{{ product.price }}</p>
+      </mat-card-content>
 
-    <button class="addtocart" (click)="addToCart(product)" >
-      Add to Cart
-    </button>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="addToCart(product)">
+          🛒 Add to Cart
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="no-products" *ngIf="filteredProducts.length === 0">
+      <h3>No products found matching your filters</h3>
+      <button mat-raised-button color="primary" (click)="clearFilters()">
+        Clear Filters
+      </button>
+    </div>
 
   </div>
 

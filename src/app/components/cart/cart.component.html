@@ -1,47 +1,112 @@
 <div class="cart-container">
 
-  <h2 class="cart-title">🛒 Your Cart</h2>
+  <h2 class="cart-title">🛒 Your Shopping Cart</h2>
 
-  <!-- If Cart is Empty -->
-  <div *ngIf="cartItems.length === 0" class="empty-cart">
-    <p>Your cart is empty 💔</p>
-    <button class="shop-btn" routerLink="/products" >Start Shopping</button>
-  </div>
+  <!-- Empty Cart -->
+  <mat-card class="empty-cart" *ngIf="cartItems.length === 0">
+    <mat-card-content>
+      <div class="empty-state">
+        <mat-icon class="empty-icon">shopping_cart</mat-icon>
+        <h3>Your cart is empty</h3>
+        <p>Start adding some amazing products!</p>
+        <button mat-raised-button color="primary" routerLink="/products">
+          Browse Products
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-  <!-- If Cart Has Items -->
+  <!-- Cart Items Table -->
   <div *ngIf="cartItems.length > 0">
+    
+    <mat-card class="cart-table-card">
+      <table mat-table [dataSource]="cartItems" class="cart-table">
 
-    <div class="cart-item" *ngFor="let item of cartItems">
+        <!-- Image Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>Image</th>
+          <td mat-cell *matCellDef="let item">
+            <img [src]="item.image" [alt]="item.name" class="product-image">
+          </td>
+        </ng-container>
 
-      <img [src]="item.image" alt="{{item.name}}" />
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Product</th>
+          <td mat-cell *matCellDef="let item" class="product-name">{{ item.name }}</td>
+        </ng-container>
 
-      <div class="item-details">
-        <h3>{{ item.name }}</h3>
-        <p>Price: ₹{{ item.price }}</p>
-        <p>Subtotal: ₹{{ item.price * item.quantity }}</p>
-      </div>
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let item">₹{{ item.price }}</td>
+        </ng-container>
 
-      <!-- Quantity Controls -->
-      <div class="quantity-control">
-        <button (click)="decreaseQuantity(item)">-</button>
-        <span>{{ item.quantity }}</span>
-        <button (click)="increaseQuantity(item)">+</button>
-      </div>
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantity</th>
+          <td mat-cell *matCellDef="let item">
+            <div class="quantity-controls">
+              <button mat-mini-fab color="accent" (click)="decreaseQuantity(item)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span class="quantity-value">{{ item.quantity }}</span>
+              <button mat-mini-fab color="accent" (click)="increaseQuantity(item)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
 
-      <!-- Remove -->
-      <button class="remove-btn" (click)="removeItem(item)">
-        Remove
-      </button>
+        <!-- Subtotal Column -->
+        <ng-container matColumnDef="subtotal">
+          <th mat-header-cell *matHeaderCellDef>Subtotal</th>
+          <td mat-cell *matCellDef="let item" class="subtotal">
+            ₹{{ item.price * item.quantity }}
+          </td>
+        </ng-container>
 
-    </div>
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let item">
+            <button mat-icon-button color="warn" (click)="removeItem(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-    <!-- Summary Section -->
-    <div class="cart-summary">
-      <h3>Total: ₹{{ getTotal() }}</h3>
-      <button routerLink="/checkout" class="checkout-btn">
-        Proceed to Checkout
-      </button>
-    </div>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="cart-row"></tr>
+      </table>
+    </mat-card>
+
+    <!-- Cart Summary -->
+    <mat-card class="cart-summary">
+      <mat-card-header>
+        <mat-card-title>Order Summary</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>₹{{ getTotal() }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span>Free</span>
+        </div>
+        <hr>
+        <div class="summary-row total">
+          <span>Total:</span>
+          <span>₹{{ getTotal() }}</span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/checkout" class="checkout-btn">
+          Proceed to Checkout
+        </button>
+      </mat-card-actions>
+    </mat-card>
 
   </div>
 

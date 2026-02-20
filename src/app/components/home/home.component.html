@@ -2,28 +2,83 @@
 
   <!-- Hero Section -->
   <div class="hero">
-    <h1>Welcome to Cuddlecot 🧸</h1>
-    <p>Comfortable & Cute Clothing for Little Stars ✨</p>
-    <button routerLink="/products">Shop Now</button>
+    <div class="hero-content">
+      <h1 class="hero-title">Welcome to Cuddlecot 🧸</h1>
+      <p class="hero-subtitle">Comfortable & Cute Clothing for Little Stars ✨</p>
+      <button mat-raised-button color="primary" routerLink="/products" class="shop-now-btn">
+        Shop Now
+      </button>
+    </div>
   </div>
 
-  <!-- Featured Section -->
-  <div class="featured">
-    <h2>Featured Categories</h2>
-
-    <div class="category-card">
-      <h3>Boys Collection 👦</h3>
-      <p>Stylish & Comfortable wear</p>
+  <!-- Features Section -->
+  <div class="features-section">
+    <h2 class="section-title">Why Choose Cuddlecot?</h2>
+    <div class="features-grid">
+      <mat-card class="feature-card" *ngFor="let feature of features">
+        <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </mat-card>
     </div>
+  </div>
 
-    <div class="category-card">
-      <h3>Girls Collection 👧</h3>
-      <p>Trendy & Adorable outfits</p>
-    </div>
+  <!-- Categories Section -->
+  <div class="categories-section">
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="categories-grid">
+      
+      <mat-card class="category-card boys">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>boy</mat-icon>
+            Boys Collection
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Stylish & comfortable wear for active boys</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/products">
+            Browse Boys
+          </button>
+        </mat-card-actions>
+      </mat-card>
 
-    <div class="category-card">
-      <h3>Accessories 🧦</h3>
-      <p>Little things that matter</p>
+      <mat-card class="category-card girls">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>girl</mat-icon>
+            Girls Collection
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Trendy & adorable outfits for little princesses</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/products">
+            Browse Girls
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="category-card all">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>checkroom</mat-icon>
+            All Products
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Explore our complete collection</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/products">
+            View All
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
     </div>
   </div>
 
