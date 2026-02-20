@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ApiService } from '../../services/api.service';
@@ -19,7 +18,6 @@ import { CartItem } from '../../models/cart.model';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatTableModule,
     MatProgressSpinnerModule,
     MatSnackBarModule
   ],
@@ -29,7 +27,6 @@ import { CartItem } from '../../models/cart.model';
 export class CartComponent implements OnInit {
 
   cartItems: CartItem[] = [];
-  displayedColumns: string[] = ['image', 'name', 'price', 'quantity', 'subtotal', 'actions'];
 
   constructor(
     private api: ApiService,

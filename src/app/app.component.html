@@ -1,7 +1,9 @@
-<mat-toolbar class="navbar" *ngIf="router.url !== '/login'">
+<mat-toolbar class="navbar" *ngIf="router.url !== '/login' && !router.url.startsWith('/employee')">
   
   <div class="logo-section">
-    <mat-icon class="logo-icon">child_care</mat-icon>
+    <div class="logo-icon-wrapper">
+      <mat-icon class="logo-icon">child_care</mat-icon>
+    </div>
     <div class="brand">
       <h1 class="brand-title">Cuddlecot</h1>
       <p class="brand-tagline">Shop with Comfort</p>
@@ -11,25 +13,25 @@
   <span class="spacer"></span>
 
   <nav class="nav-links">
-    <a mat-button routerLink="/home" routerLinkActive="active">
+    <a mat-button routerLink="/home" routerLinkActive="active" class="nav-link">
       <mat-icon>home</mat-icon>
-      Home
+      <span>Home</span>
     </a>
-    <a mat-button routerLink="/products" routerLinkActive="active">
+    <a mat-button routerLink="/products" routerLinkActive="active" class="nav-link">
       <mat-icon>shopping_bag</mat-icon>
-      Products
+      <span>Products</span>
     </a>
-    <a mat-button routerLink="/cart" routerLinkActive="active">
+    <a mat-button routerLink="/cart" routerLinkActive="active" class="nav-link">
       <mat-icon [matBadge]="cartItemCount" matBadgeColor="warn" [matBadgeHidden]="cartItemCount === 0">shopping_cart</mat-icon>
-      Cart
+      <span>Cart</span>
     </a>
-    <a mat-button routerLink="/checkout" routerLinkActive="active">
+    <a mat-button routerLink="/checkout" routerLinkActive="active" class="nav-link">
       <mat-icon>payment</mat-icon>
-      Checkout
+      <span>Checkout</span>
     </a>
-    <a mat-button routerLink="/about" routerLinkActive="active">
+    <a mat-button routerLink="/about" routerLinkActive="active" class="nav-link">
       <mat-icon>info</mat-icon>
-      About
+      <span>About</span>
     </a>
   </nav>
 
@@ -37,9 +39,9 @@
 
   <div class="user-section">
     <span class="user-name">👋 {{ userName }}</span>
-    <button mat-raised-button color="warn" (click)="logout()">
+    <button mat-raised-button class="logout-btn" (click)="logout()">
       <mat-icon>logout</mat-icon>
-      Logout
+      <span>Logout</span>
     </button>
   </div>
 
@@ -49,6 +51,7 @@
   <router-outlet></router-outlet>
 </main>
 
-<footer class="footer" *ngIf="router.url !== '/login'">
+<footer class="footer" *ngIf="router.url !== '/login' && !router.url.startsWith('/employee')">
+  <div class="footer-line"></div>
   <p>&copy; 2026 Cuddlecot. All rights reserved. | Made with ❤️ for kids</p>
 </footer>

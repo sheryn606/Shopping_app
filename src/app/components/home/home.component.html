@@ -1,22 +1,75 @@
 <div class="home-container">
 
-  <!-- Hero Section -->
+  <!-- Product Carousel with Offers -->
+  <div class="carousel-section">
+    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="carousel-content">
+            <div class="offer-badge">25% OFF</div>
+            <h2>Girls Princess Dress Collection</h2>
+            <p class="offer-text">Special discount on all princess dresses</p>
+            <p class="price-info"><span class="original-price">₹1999</span> <span class="discount-price">₹1499</span></p>
+            <button mat-raised-button routerLink="/products" class="carousel-btn">Shop Now</button>
+          </div>
+          <div class="carousel-image">
+            <img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=600" alt="Girls Dress">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-content">
+            <div class="offer-badge">30% OFF</div>
+            <h2>Boys Casual Wear Sale</h2>
+            <p class="offer-text">Get the best deals on boys casual collection</p>
+            <p class="price-info"><span class="original-price">₹1199</span> <span class="discount-price">₹839</span></p>
+            <button mat-raised-button routerLink="/products" class="carousel-btn">Shop Now</button>
+          </div>
+          <div class="carousel-image">
+            <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=600" alt="Boys Wear">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-content">
+            <div class="offer-badge">BUY 2 GET 1 FREE</div>
+            <h2>Kids Ethnic Wear Festival Sale</h2>
+            <p class="offer-text">Perfect for festive occasions</p>
+            <p class="price-info"><span class="original-price">₹2499</span> <span class="discount-price">₹1999</span></p>
+            <button mat-raised-button routerLink="/products" class="carousel-btn">Shop Now</button>
+          </div>
+          <div class="carousel-image">
+            <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=600" alt="Kids Ethnic">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section with Background -->
   <div class="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">Welcome to Cuddlecot 🧸</h1>
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade-in-up">
+      <h1 class="hero-title">🧸 Welcome to Cuddlecot</h1>
       <p class="hero-subtitle">Comfortable & Cute Clothing for Little Stars ✨</p>
-      <button mat-raised-button color="primary" routerLink="/products" class="shop-now-btn">
-        Shop Now
+      <button mat-raised-button routerLink="/products" class="shop-now-btn">
+        <span>Shop Now</span>
+        <mat-icon>arrow_forward</mat-icon>
       </button>
     </div>
   </div>
 
   <!-- Features Section -->
   <div class="features-section">
-    <h2 class="section-title">Why Choose Cuddlecot?</h2>
+    <h2 class="section-title fade-in-up">Why Choose Cuddlecot?</h2>
     <div class="features-grid">
-      <mat-card class="feature-card" *ngFor="let feature of features">
-        <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
+      <mat-card class="feature-card fade-in-up stagger-1" *ngFor="let feature of features; let i = index" [class]="'fade-in-up stagger-' + (i + 1)">
+        <div class="feature-icon-wrapper">
+          <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
+        </div>
         <h3>{{ feature.title }}</h3>
         <p>{{ feature.description }}</p>
       </mat-card>
@@ -25,56 +78,68 @@
 
   <!-- Categories Section -->
   <div class="categories-section">
-    <h2 class="section-title">Shop by Category</h2>
+    <h2 class="section-title fade-in-up">Shop by Category</h2>
     <div class="categories-grid">
       
-      <mat-card class="category-card boys">
+      <mat-card class="category-card boys fade-in-up stagger-1">
+        <div class="category-bg"></div>
         <mat-card-header>
           <mat-card-title>
-            <mat-icon>boy</mat-icon>
-            Boys Collection
+            <div class="category-icon-wrapper">
+              <mat-icon>boy</mat-icon>
+            </div>
+            <span>Boys Collection</span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>Stylish & comfortable wear for active boys</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" routerLink="/products">
-            Browse Boys
+          <button mat-raised-button [routerLink]="['/products']" [queryParams]="{category: 'Boys'}" class="category-btn">
+            <span>Browse Boys</span>
+            <mat-icon>arrow_forward</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>
 
-      <mat-card class="category-card girls">
+      <mat-card class="category-card girls fade-in-up stagger-2">
+        <div class="category-bg"></div>
         <mat-card-header>
           <mat-card-title>
-            <mat-icon>girl</mat-icon>
-            Girls Collection
+            <div class="category-icon-wrapper">
+              <mat-icon>girl</mat-icon>
+            </div>
+            <span>Girls Collection</span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>Trendy & adorable outfits for little princesses</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" routerLink="/products">
-            Browse Girls
+          <button mat-raised-button [routerLink]="['/products']" [queryParams]="{category: 'Girls'}" class="category-btn">
+            <span>Browse Girls</span>
+            <mat-icon>arrow_forward</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>
 
-      <mat-card class="category-card all">
+      <mat-card class="category-card all fade-in-up stagger-3">
+        <div class="category-bg"></div>
         <mat-card-header>
           <mat-card-title>
-            <mat-icon>checkroom</mat-icon>
-            All Products
+            <div class="category-icon-wrapper">
+              <mat-icon>checkroom</mat-icon>
+            </div>
+            <span>All Products</span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>Explore our complete collection</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" routerLink="/products">
-            View All
+          <button mat-raised-button routerLink="/products" class="category-btn">
+            <span>View All</span>
+            <mat-icon>arrow_forward</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>

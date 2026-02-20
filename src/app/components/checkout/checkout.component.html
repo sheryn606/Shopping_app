@@ -1,11 +1,14 @@
 <div class="checkout-container">
 
-  <h2 class="checkout-title">🛍️ Checkout</h2>
+  <h2 class="checkout-title">
+    <mat-icon class="title-icon">payment</mat-icon>
+    <span>Checkout</span>
+  </h2>
 
   <div class="checkout-content">
     
     <!-- Order Summary -->
-    <mat-card class="order-summary">
+    <mat-card class="order-summary fade-in-up">
       <mat-card-header>
         <mat-card-title>Order Summary</mat-card-title>
       </mat-card-header>
@@ -61,8 +64,9 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="placeOrder()" class="place-order-btn">
-          Place Order
+        <button mat-raised-button (click)="placeOrder()" class="place-order-btn">
+          <mat-icon>check_circle</mat-icon>
+          <span>Place Order</span>
         </button>
       </mat-card-actions>
     </mat-card>

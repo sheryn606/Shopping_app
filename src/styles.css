@@ -1,4 +1,5 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 /* Global Styles */
 * {
@@ -7,29 +8,41 @@
   padding: 0;
 }
 
-body {
+html, body { 
+  height: 100%; 
   margin: 0;
-  padding: 0;
-  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background: #ffffff;
   min-height: 100vh;
-  color: #333;
+  color: #282c3f;
+  position: relative;
 }
 
-/* Custom Material Theme Colors */
-.mat-mdc-raised-button.mat-primary {
-  --mdc-protected-button-container-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* Clean Light Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: -2;
 }
 
-/* Success Snackbar */
-.success-snackbar {
-  background-color: #4caf50 !important;
-  color: white !important;
+/* No Pattern Overlay */
+body::after {
+  display: none;
 }
 
-.error-snackbar {
-  background-color: #f44336 !important;
-  color: white !important;
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Smooth Scrolling */
@@ -39,12 +52,14 @@ html {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
+  color: #282c3f;
 }
 
 p {
   line-height: 1.6;
+  color: #535766;
 }
 
 /* Link Styles */
@@ -55,40 +70,221 @@ a {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5f5f6;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 5px;
+  background: #d4d5d9;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #b0b2b8;
 }
 
-/* Material Override - Button Hover */
-.mat-mdc-raised-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
-}
-
-/* Material Card Styles */
+/* Material Design Light Theme Overrides */
 .mat-mdc-card {
+  background: #ffffff !important;
+  border: 1px solid #e9e9eb !important;
+  color: #282c3f !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+}
+
+.mat-mdc-form-field {
+  color: #282c3f !important;
+}
+
+.mat-mdc-input-element {
+  color: #282c3f !important;
+  caret-color: #ff3f6c !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: rgba(255, 63, 108, 0.05) !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: #f5f5f6 !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #f5f5f6 !important;
+}
+
+.mat-mdc-form-field-label,
+.mdc-floating-label {
+  color: #535766 !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-label,
+.mat-mdc-form-field.mat-focused .mdc-floating-label {
+  color: #ff3f6c !important;
+}
+
+.mdc-line-ripple::before,
+.mdc-line-ripple::after {
+  border-bottom-color: #ff3f6c !important;
+}
+
+.mat-mdc-select-value,
+.mat-mdc-select-arrow {
+  color: #282c3f !important;
+}
+
+.mat-mdc-option {
+  color: #282c3f !important;
+}
+
+.mat-mdc-table {
+  background: #ffffff !important;
+  color: #282c3f !important;
+}
+
+.mat-mdc-header-cell {
+  color: #282c3f !important;
+  font-weight: 700 !important;
+}
+
+.mat-mdc-cell {
+  color: #535766 !important;
+}
+
+/* Glassmorphism Card Base */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Material Card Override - REMOVED CONFLICTING STYLES */
+
+/* Material Card Content */
+.mat-mdc-card-content {
+  color: #535766 !important;
+}
+
+.mat-mdc-card-title {
+  color: #282c3f !important;
+}
+
+.mat-mdc-card-subtitle {
+  color: #535766 !important;
+}
+
+/* Material Buttons */
+.mat-mdc-raised-button {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.mat-mdc-raised-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.mat-mdc-raised-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.mat-mdc-raised-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(255, 63, 108, 0.3) !important;
+}
+
+/* Material Form Fields - Removed conflicting dark theme */
+
+/* Success Snackbar */
+.success-snackbar {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: white !important;
   border-radius: 12px !important;
 }
 
-/* Loading Animation */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.error-snackbar {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: white !important;
+  border-radius: 12px !important;
 }
 
+/* Page Load Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
+  }
+}
+
+/* Stagger Animation Classes */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Spinner Loading */
+.mat-mdc-progress-spinner circle {
+  stroke: #ff3f6c !important;
+}
+
+/* Material Chips */
+.mat-mdc-chip {
+  background: #fff5f7 !important;
+  color: #ff3f6c !important;
+  border: 1px solid #ff3f6c !important;
+}
+
+/* Material Select Panel - Removed conflicting dark theme */

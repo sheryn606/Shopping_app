@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from "@angular/router";
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,32 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      // Wait for Bootstrap to load
+      setTimeout(() => {
+        const carouselElement = document.querySelector('#productCarousel');
+        if (carouselElement) {
+          if (typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+            const carousel = new bootstrap.Carousel(carouselElement, {
+              interval: 3000,
+              ride: 'carousel',
+              wrap: true,
+              keyboard: true,
+              pause: 'hover'
+            });
+            console.log('Bootstrap carousel initialized successfully');
+          } else {
+            console.error('Bootstrap is not loaded');
+          }
+        }
+      }, 100);
+    }
+  }
 
   features = [
     {

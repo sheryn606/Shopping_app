@@ -1,44 +1,67 @@
+/* Clean White Navbar - Myntra Style */
 .navbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff !important;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.05) !important;
+  border-bottom: 1px solid #f5f5f6 !important;
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 0 24px;
+  padding: 0 32px !important;
+  height: 80px;
+  display: flex;
+  align-items: center;
 }
 
 .logo-section {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.logo-icon-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff3f6c, #fc4c4c);
+  border-radius: 4px;
 }
 
 .logo-icon {
-  font-size: 36px;
-  width: 36px;
-  height: 36px;
-  color: white;
+  font-size: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  color: #ffffff !important;
 }
 
 .brand {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2px;
 }
 
 .brand-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
+  font-size: 26px;
+  background: linear-gradient(135deg, #ff3f6c 0%, #fc4c4c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
   line-height: 1.2;
+  letter-spacing: -0.5px;
+  font-weight: 700;
 }
 
 .brand-tagline {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #94a3b8x;
+  color: #64748b;
   margin: 0;
   line-height: 1;
+  font-weight: 500;
 }
 
 .spacer {
@@ -50,80 +73,146 @@
   gap: 8px;
 }
 
-.nav-links a {
-  color: white;
-  font-size: 15px;
-  font-weight: 500;
+.nav-link {
+  color: #282c3f !important;
+  font-size: 14px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  padding: 28px 16px !important;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
-.nav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.nav-link::before {
+  display: none;
 }
 
-.nav-links a.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  font-weight: 600;
+.nav-link:hover {
+  background: transparent;
+  color: #ff3f6c !important;
+  transform: none;
+}
+
+.nav-link.active {
+  background: transparent;
+  color: #ff3f6c !important;
+  font-weight: 700;
+  border-bottom: 3px solid #ff3f6c;
+  box-shadow: none;
+}
+
+.nav-link.active::before {
+  width: 80%;
 }
 
 .nav-links mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: #282c3f !important;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover mat-icon {
+  color: #ff3f6c !important;
+}
+
+.nav-link.active mat-icon {
+  color: #ff3f6c !important;
 }
 
 .user-section {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
+  animation: fadeIn 0.8s ease-out 0.2s backwards;
 }
 
 .user-name {
-  color: white;
+  color: #282c3f;
   font-size: 14px;
-  font-weight: 500;
-}
-
-.user-section button {
+  font-weight: 600;
+  padding: 8px 16px;
+  background: #f5f5f6;
+  border-radius: 20px;
+  border: 1px solid #e9e9eb;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-weight: 600;
+  gap: 8px;
 }
 
-.user-section mat-icon {
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
+.logout-btn {
+  height: 40px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.8), rgba(220, 38, 38, 0.8)) !important;
+  color: white !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+  padding: 8px 20px !important;
+  transition: all 0.3s ease !important;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
+  transform: translateY(-2px) scale(1.05) !important;
+}
+
+.logout-btn mat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: white !important;
 }
 
 .main-content {
-  min-height: calc(100vh - 128px);
+  min-height: calc(100vh - 150px);
+  animation: fadeIn 0.6s ease-out;
 }
 
+/* Glassmorphism Footer */
 .footer {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(99, 102, 241, 0.2);
+  color: #cbd5e1;
   text-align: center;
-  padding: 20px;
-  margin-top: 40px;
+  padding: 24px;
+  margin-top: 60px;
+  position: relative;
+}
+
+.footer-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+  animation: glow 3s ease-in-out infinite;
 }
 
 .footer p {
   margin: 0;
   font-size: 14px;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .nav-links a {
+  .nav-link {
     font-size: 14px;
-    padding: 6px 12px;
+    padding: 8px 14px !important;
   }
   
   .user-name {
@@ -133,28 +222,31 @@
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 0 12px;
+    padding: 0 16px !important;
   }
   
   .nav-links {
-    flex-wrap: wrap;
     gap: 4px;
   }
   
-  .nav-links a {
+  .nav-link {
     font-size: 12px;
-    padding: 6px 8px;
+    padding: 8px 10px !important;
   }
   
-  .nav-links a span {
+  .nav-link span {
     display: none;
   }
   
   .brand-title {
-    font-size: 18px;
+    font-size: 20px;
   }
   
   .brand-tagline {
     font-size: 9px;
+  }
+  
+  .logout-btn span {
+    display: none;
   }
 }

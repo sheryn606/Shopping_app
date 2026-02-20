@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
@@ -25,7 +27,8 @@ import { Product } from '../../models/product.model';
     MatInputModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatIconModule
   ],
   templateUrl: './products.component.html',
   styleUrl:'./products.component.css'
@@ -41,11 +44,18 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.loadProducts();
+    // Check for category query parameter
+    this.route.queryParams.subscribe(params => {
+      if (params['category']) {
+        this.selectedCategory = params['category'];
+      }
+      this.loadProducts();
+    });
   }
 
   loadProducts() {

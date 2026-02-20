@@ -158,6 +158,28 @@ app.post('/api/orders', (req, res) => {
   });
 });
 
+// ✅ Get all orders for employee dashboard (MUST be before :userId route)
+app.get('/api/orders/all', (req, res) => {
+  const query = `
+    SELECT o.id, o.user_id, o.total_amount, o.status, o.order_date,
+           u.name as customer_name,
+           GROUP_CONCAT(CONCAT(p.name, ' (x', oi.quantity, ')') SEPARATOR ', ') as items
+    FROM orders o
+    JOIN users u ON o.user_id = u.id
+    LEFT JOIN order_items oi ON o.id = oi.order_id
+    LEFT JOIN products p ON oi.product_id = p.id
+    GROUP BY o.id, o.user_id, o.total_amount, o.status, o.order_date, u.name
+    ORDER BY o.order_date DESC
+  `;
+  
+  db.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(results);
+  });
+});
+
 // ✅ Get user's order history
 app.get('/api/orders/:userId', (req, res) => {
   const query = `
@@ -174,6 +196,111 @@ app.get('/api/orders/:userId', (req, res) => {
       return res.status(500).json({ error: err.message });
     }
     res.json(results);
+  });
+});
+
+// ==================== BILLS ====================
+
+// ✅ Create bill after order
+app.post('/api/bills', (req, res) => {
+  const { orderId, userId, customerName, items, subtotal, tax, total, paymentStatus } = req.body;
+  
+  const billQuery = `INSERT INTO bills (order_id, user_id, customer_name, subtotal, tax, total, payment_status, created_at) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, NOW())`;
+  
+  db.query(billQuery, [orderId, userId, customerName, subtotal, tax, total, paymentStatus], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    
+    const billId = result.insertId;
+    
+    // Insert bill items
+    const itemsQuery = 'INSERT INTO bill_items (bill_id, product_name, quantity, price, subtotal) VALUES ?';
+    const values = items.map(item => [billId, item.productName, item.quantity, item.price, item.subtotal]);
+    
+    db.query(itemsQuery, [values], (err) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.json({ message: 'Bill created successfully', billId });
+    });
+  });
+});
+
+// ✅ Get bill by order ID
+app.get('/api/bills/:orderId', (req, res) => {
+  const billQuery = `
+    SELECT b.*, bi.product_name, bi.quantity, bi.price, bi.subtotal
+    FROM bills b
+    LEFT JOIN bill_items bi ON b.id = bi.bill_id
+    WHERE b.order_id = ?
+  `;
+  
+  db.query(billQuery, [req.params.orderId], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Bill not found' });
+    }
+    
+    // Format the response
+    const bill = {
+      id: results[0].id,
+      orderId: results[0].order_id,
+      userId: results[0].user_id,
+      customerName: results[0].customer_name,
+      subtotal: parseFloat(results[0].subtotal),
+      tax: parseFloat(results[0].tax),
+      total: parseFloat(results[0].total),
+      paymentStatus: results[0].payment_status,
+      createdAt: results[0].created_at,
+      items: results.map(row => ({
+        productName: row.product_name,
+        quantity: row.quantity,
+        price: parseFloat(row.price),
+        subtotal: parseFloat(row.subtotal)
+      }))
+    };
+    
+    res.json(bill);
+  });
+});
+
+// ==================== EMPLOYEE ROUTES ====================
+
+// ✅ Employee Login
+app.post('/api/employee/login', (req, res) => {
+  const { employeeId, password } = req.body;
+  const query = 'SELECT * FROM employees WHERE employee_id = ? AND password = ?';
+  
+  db.query(query, [employeeId, password], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    if (results.length === 0) {
+      return res.status(401).json({ message: 'Invalid employee ID or password' });
+    }
+    res.json({ message: 'Login successful', employee: results[0] });
+  });
+});
+
+// ✅ Update order status
+app.put('/api/orders/:id/status', (req, res) => {
+  const { status } = req.body;
+  const orderId = req.params.id;
+  
+  const query = 'UPDATE orders SET status = ? WHERE id = ?';
+  db.query(query, [status, orderId], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.json({ message: 'Order status updated successfully', status });
   });
 });
 

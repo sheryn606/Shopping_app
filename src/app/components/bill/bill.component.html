@@ -1,0 +1,92 @@
+<div class="bill-dialog">
+  <div id="bill-content" class="bill-content">
+    <div class="bill-header">
+      <div class="logo">
+        <div class="logo-circle">
+          <span class="logo-icon">👶</span>
+        </div>
+        <h1>Cuddlecot</h1>
+        <p>Kids Clothing Shop</p>
+      </div>
+      <div class="bill-title">
+        <h2>Payment Receipt</h2>
+        <p class="payment-confirmed">✓ Payment Confirmed</p>
+      </div>
+    </div>
+
+    <div class="bill-info">
+      <div class="info-row">
+        <span class="label">Order ID:</span>
+        <span class="value">#{{ bill.orderId }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Customer:</span>
+        <span class="value">{{ bill.customerName }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Date:</span>
+        <span class="value">{{ bill.createdAt | date: 'medium' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Payment Status:</span>
+        <span class="value status-paid">{{ bill.paymentStatus }}</span>
+      </div>
+    </div>
+
+    <div class="items-section">
+      <h3>Order Items</h3>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of bill.items">
+            <td>{{ item.productName }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.price.toFixed(2) }}</td>
+            <td>₹{{ item.subtotal.toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals-section">
+      <div class="total-row">
+        <span>Subtotal:</span>
+        <span>₹{{ bill.subtotal.toFixed(2) }}</span>
+      </div>
+      <div class="total-row">
+        <span>Tax (18% GST):</span>
+        <span>₹{{ bill.tax.toFixed(2) }}</span>
+      </div>
+      <div class="total-row final-total">
+        <span>Total Amount Paid:</span>
+        <span>₹{{ bill.total.toFixed(2) }}</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Thank you for shopping with Cuddlecot!</p>
+      <p>For any queries, contact us at support&#64;cuddlecot.com</p>
+    </div>
+  </div>
+
+  <div class="actions" mat-dialog-actions>
+    <button mat-raised-button (click)="printBill()" class="print-btn">
+      <mat-icon>print</mat-icon>
+      Print Bill
+    </button>
+    <button mat-raised-button (click)="downloadBill()" class="download-btn">
+      <mat-icon>download</mat-icon>
+      Download Bill
+    </button>
+    <button mat-raised-button (click)="close()" class="close-btn">
+      Close
+    </button>
+  </div>
+</div>

@@ -5,14 +5,14 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { ApiService } from '../services/api.service';
+import { MatIconModule } from '@angular/material/icon';
+import { ApiService } from '../../services/api.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-employee-login',
   standalone: true,
   imports: [
     CommonModule,
@@ -20,27 +20,27 @@ import { ApiService } from '../services/api.service';
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './employee-login.component.html',
+  styleUrls: ['./employee-login.component.css']
 })
-export class LoginComponent {
+export class EmployeeLoginComponent {
 
   loginForm: FormGroup;
   loading = false;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private router: Router,
     private api: ApiService,
     private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      employeeId: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -48,22 +48,25 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       this.loading = true;
-      const { email, password } = this.loginForm.value;
+      const { employeeId, password } = this.loginForm.value;
       
-      this.api.login(email, password).subscribe({
+      this.api.employeeLogin(employeeId, password).subscribe({
         next: (response) => {
           this.loading = false;
-          this.snackBar.open('Login successful! Welcome ' + response.user.name, 'Close', {
+          localStorage.setItem('employeeId', response.employee.employee_id);
+          localStorage.setItem('employeeName', response.employee.name);
+          
+          this.snackBar.open('Login successful! Welcome ' + response.employee.name, 'Close', {
             duration: 3000,
             horizontalPosition: 'end',
             verticalPosition: 'top',
             panelClass: ['success-snackbar']
           });
-          this.router.navigate(['/home']);
+          this.router.navigate(['/employee/dashboard']);
         },
         error: (error) => {
           this.loading = false;
-          this.snackBar.open('Invalid email or password', 'Close', {
+          this.snackBar.open('Invalid employee ID or password', 'Close', {
             duration: 3000,
             horizontalPosition: 'end',
             verticalPosition: 'top',
@@ -74,7 +77,7 @@ export class LoginComponent {
     }
   }
 
-  goToEmployeeLogin() {
-    this.router.navigate(['/employee/login']);
+  goToCustomerLogin() {
+    this.router.navigate(['/login']);
   }
 }

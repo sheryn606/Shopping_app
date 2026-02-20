@@ -1,13 +1,14 @@
 <div class="about-page">
 
-  <div class="about-header">
-    <h1>💖 About Cuddlecot</h1>
+  <div class="about-header fade-in-up">
+    <mat-icon class="header-icon">favorite</mat-icon>
+    <h1>About Cuddlecot</h1>
     <p class="subtitle">Your trusted partner in kids' fashion</p>
   </div>
 
   <div class="about-content">
     
-    <mat-card class="about-intro">
+    <mat-card class="about-intro fade-in-up stagger-1">
       <mat-card-content>
         <h2>Our Story</h2>
         <p>
@@ -23,14 +24,14 @@
     </mat-card>
 
     <div class="features-grid">
-      <mat-card class="feature-item" *ngFor="let feature of features">
+      <mat-card class="feature-item fade-in-up" *ngFor="let feature of features; let i = index" [style.animation-delay]="(i * 0.1 + 0.2) + 's'">
         <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
         <h3>{{ feature.title }}</h3>
         <p>{{ feature.desc }}</p>
       </mat-card>
     </div>
 
-    <mat-card class="about-collections">
+    <mat-card class="about-collections fade-in-up stagger-3">
       <mat-card-header>
         <mat-card-title>Our Collections</mat-card-title>
       </mat-card-header>
@@ -56,7 +57,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="about-tech">
+    <mat-card class="about-tech fade-in-up stagger-4">
       <mat-card-content>
         <h2>Technology Stack</h2>
         <p>

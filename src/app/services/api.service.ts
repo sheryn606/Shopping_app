@@ -125,4 +125,45 @@ export class ApiService {
     const userId = this.getCurrentUserId();
     return this.http.get<any[]>(`${this.apiUrl}/orders/${userId}`);
   }
+
+  // ==================== BILLS ====================
+  
+  createBill(billData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/bills`, billData);
+  }
+
+  getBillByOrderId(orderId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/bills/${orderId}`);
+  }
+
+  // ==================== EMPLOYEE ====================
+  
+  employeeLogin(employeeId: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/employee/login`, { employeeId, password });
+  }
+
+  getAllOrders(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/orders/all`);
+  }
+
+  updateOrderStatus(orderId: number, status: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/orders/${orderId}/status`, { status });
+  }
+
+  isEmployeeLoggedIn(): boolean {
+    return !!localStorage.getItem('employeeId');
+  }
+
+  getEmployeeId(): string | null {
+    return localStorage.getItem('employeeId');
+  }
+
+  getEmployeeName(): string {
+    return localStorage.getItem('employeeName') || 'Employee';
+  }
+
+  employeeLogout(): void {
+    localStorage.removeItem('employeeId');
+    localStorage.removeItem('employeeName');
+  }
 }
